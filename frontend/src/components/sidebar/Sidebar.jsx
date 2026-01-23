@@ -1,18 +1,15 @@
-import { IoSearchSharp } from 'react-icons/io5';
+import Conversations from "./Conversations";
+import LogoutButton from "./LogoutButton";
+import SearchInput from "./SearchInputt";
 
-const SearchInput = () => {
-    return (
-        <form className="flex items-center gap-2" onSubmit={(e) => e.preventDefault()}>
-            <input
-                type="text"
-                placeholder="Search..."
-                className="input input-bordered rounded-full"
-            />
-            <button type="submit" className="btn btn-primary rounded-full">
-                <IoSearchSharp className='w-6 h-6 outline-none' />
-            </button>
-        </form>
-    );
+const Sidebar = () => {
+	return (
+		<div className='border-r border-slate-700/50 p-4 flex flex-col backdrop-blur-xl bg-white/5'>
+			<SearchInput />
+			<div className='divider px-3 opacity-50'></div>
+			<Conversations />
+			<LogoutButton />
+		</div>
+	);
 };
-
-export default SearchInput;
+export default Sidebar;
