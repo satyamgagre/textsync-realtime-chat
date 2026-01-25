@@ -14,7 +14,7 @@ const SignUp = () => {
   });
 
   const handleCheckboxChange = (gender) => {
-    setInputs({ ...inputs, gender: gender });
+    setInputs({ ...inputs, gender });
   }
 
   const handleSubmit = (e) => {
@@ -108,7 +108,9 @@ const SignUp = () => {
           </div>
 
           {/* Gender */}
-          <GenderCheckBox />
+          <GenderCheckBox 
+          onCheckBoxChange={handleCheckboxChange}  selectedGender={inputs.gender}
+          />
 
           {/* Login link */}
           <Link to="/login"
