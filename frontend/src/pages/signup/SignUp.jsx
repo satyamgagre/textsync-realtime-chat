@@ -1,8 +1,28 @@
+import { useState } from "react";
 import GenderCheckBox from "./GenderCheckBox";
 import { Link } from "react-router-dom";
 
 
 const SignUp = () => {
+
+  const [inputs, setInputs] = useState({
+    fullName: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+  });
+
+  const handleCheckboxChange = (gender) => {
+    setInputs({ ...inputs, gender: gender });
+  }
+
+  const handleSubmit = (e) => {
+    console.log(inputs);
+    e.preventDefault();
+  }
+
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
       <div
@@ -14,7 +34,7 @@ const SignUp = () => {
           Sign Up on <span className="text-blue-500">ChatSync</span>
         </h1>
 
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Full Name */}
           <div>
             <label className="label">
@@ -28,6 +48,8 @@ const SignUp = () => {
               className="w-full input input-bordered h-12 bg-transparent text-white
               placeholder-gray-500 border-gray-600 focus:border-blue-500
               focus:outline-none transition duration-200"
+              value={inputs.fullName}
+              onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
             />
           </div>
 
@@ -44,6 +66,8 @@ const SignUp = () => {
               className="w-full input input-bordered h-12 bg-transparent text-white
               placeholder-gray-500 border-gray-600 focus:border-blue-500
               focus:outline-none transition duration-200"
+              value={inputs.username}
+              onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
             />
           </div>
 
@@ -60,6 +84,8 @@ const SignUp = () => {
               className="w-full input input-bordered h-12 bg-transparent text-white
               placeholder-gray-500 border-gray-600 focus:border-blue-500
               focus:outline-none transition duration-200"
+              value={inputs.password}
+              onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
             />
           </div>
 
@@ -76,6 +102,8 @@ const SignUp = () => {
               className="w-full input input-bordered h-12 bg-transparent text-white
               placeholder-gray-500 border-gray-600 focus:border-blue-500
               focus:outline-none transition duration-200"
+              value={inputs.confirmPassword}
+              onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
             />
           </div>
 
