@@ -1,10 +1,9 @@
 import { useState } from "react";
-import GenderCheckBox from "./GenderCheckBox";
 import { Link } from "react-router-dom";
-
+import GenderCheckBox from "./GenderCheckBox";
+import useSignup from "../../hooks/useSignup.js";
 
 const SignUp = () => {
-
   const [inputs, setInputs] = useState({
     fullName: "",
     username: "",
@@ -13,16 +12,16 @@ const SignUp = () => {
     gender: "",
   });
 
+  const { loading, signUp } = useSignup();
+
   const handleCheckboxChange = (gender) => {
-    setInputs({ ...inputs, gender });
-  }
+    setInputs((prev) => ({ ...prev, gender }));
+  };
 
   const handleSubmit = async (e) => {
-    console.log(inputs);
     e.preventDefault();
-    await SignUp(inputs);
-  }
-
+    await signUp(inputs);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
@@ -50,7 +49,9 @@ const SignUp = () => {
               placeholder-gray-500 border-gray-600 focus:border-blue-500
               focus:outline-none transition duration-200"
               value={inputs.fullName}
-              onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
+              onChange={(e) =>
+                setInputs({ ...inputs, fullName: e.target.value })
+              }
             />
           </div>
 
@@ -68,7 +69,9 @@ const SignUp = () => {
               placeholder-gray-500 border-gray-600 focus:border-blue-500
               focus:outline-none transition duration-200"
               value={inputs.username}
-              onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
+              onChange={(e) =>
+                setInputs({ ...inputs, username: e.target.value })
+              }
             />
           </div>
 
@@ -86,7 +89,9 @@ const SignUp = () => {
               placeholder-gray-500 border-gray-600 focus:border-blue-500
               focus:outline-none transition duration-200"
               value={inputs.password}
-              onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
+              onChange={(e) =>
+                setInputs({ ...inputs, password: e.target.value })
+              }
             />
           </div>
 
@@ -104,30 +109,36 @@ const SignUp = () => {
               placeholder-gray-500 border-gray-600 focus:border-blue-500
               focus:outline-none transition duration-200"
               value={inputs.confirmPassword}
-              onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
+              onChange={(e) =>
+                setInputs({ ...inputs, confirmPassword: e.target.value })
+              }
             />
           </div>
 
           {/* Gender */}
-          <GenderCheckBox 
-          onCheckBoxChange={handleCheckboxChange}  selectedGender={inputs.gender}
+          <GenderCheckBox
+            onCheckBoxChange={handleCheckboxChange}
+            selectedGender={inputs.gender}
           />
 
           {/* Login link */}
-          <Link to="/login"
+          <Link
+            to="/login"
             className="text-sm text-gray-400 hover:text-blue-500
             hover:underline transition duration-200 inline-block"
           >
             Already have an account?
           </Link>
 
-          {/* Button */}
+          {/* Submit Button */}
           <button
             type="submit"
+            disabled={loading}
             className="btn btn-block h-12 bg-blue-600 hover:bg-blue-700
-            text-white font-semibold border-none transition duration-200"
+            text-white font-semibold border-none transition duration-200
+            disabled:opacity-50"
           >
-            Sign Up
+            {loading ? "Signing up..." : "Sign Up"}
           </button>
         </form>
       </div>

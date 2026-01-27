@@ -1,7 +1,7 @@
 import {Routes, Route} from "react-router-dom";
 import "./index.css";
 import Login from "./pages/login/login.jsx";
-import SignUp from "./pages/signup/signup.jsx";
+import SignUp from "./pages/signup/SignUp.jsx";
 import Home from "./pages/home/home.jsx";
 import { Toaster } from "react-hot-toast";
 

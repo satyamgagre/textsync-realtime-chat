@@ -4,7 +4,13 @@ import toast from "react-hot-toast";
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
 
-  const signUp = async ({ fullName, username, password, confirmPassword, gender }) => {
+  const signUp = async ({
+    fullName,
+    username,
+    password,
+    confirmPassword,
+    gender,
+  }) => {
     const success = handleInputErrors({
       fullName,
       username,
@@ -15,25 +21,35 @@ const useSignup = () => {
 
     if (!success) return;
 
-    // continue signup logic here (API call, etc.)
     setLoading(true);
+
     try {
-        const res = await fetch('http://localhost:5000/api/auth/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ fullName, username, password, confirmPassword, gender}),
-        })
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName,
+          username,
+          password,
+          confirmPassword,
+          gender,
+        }),
+      });
 
-        const data = await res.json();
+      const data = await res.json();
 
-        console.log(data);
+      if (!res.ok) {
+        throw new Error(data.error || "Signup failed");
+      }
 
+      console.log(data);
+      toast.success("Account created successfully!");
     } catch (error) {
-        toast.error(error.message || "Signup failed");
+      toast.error(error.message || "Signup failed");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -42,7 +58,13 @@ const useSignup = () => {
 
 export default useSignup;
 
-function handleInputErrors({ fullName, username, password, confirmPassword, gender }) {
+function handleInputErrors({
+  fullName,
+  username,
+  password,
+  confirmPassword,
+  gender,
+}) {
   if (!fullName || !username || !password || !confirmPassword || !gender) {
     toast.error("All fields are required");
     return false;
@@ -58,5 +80,5 @@ function handleInputErrors({ fullName, username, password, confirmPassword, gend
     return false;
   }
 
-  return true; 
+  return true;
 }
