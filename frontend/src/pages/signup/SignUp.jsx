@@ -17,9 +17,10 @@ const SignUp = () => {
     setInputs({ ...inputs, gender });
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     console.log(inputs);
     e.preventDefault();
+    await SignUp(inputs);
   }
 
 

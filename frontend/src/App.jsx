@@ -3,6 +3,7 @@ import "./index.css";
 import Login from "./pages/login/login.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import Home from "./pages/home/home.jsx";
+import { Toaster } from "react-hot-toast";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
+      <Toaster />
     </div>
   );
 }
