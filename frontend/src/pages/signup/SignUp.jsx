@@ -19,9 +19,17 @@ const SignUp = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    await signUp(inputs);
-  };
+  e.preventDefault();
+
+  if (!inputs.gender) {
+    alert("Please select a gender");
+    return;
+  }
+
+  await signUp(inputs);
+};
+
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
