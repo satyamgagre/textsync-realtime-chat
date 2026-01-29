@@ -1,13 +1,32 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "./AuthContext";
+import { createContext, useContext, useState } from "react";
+
+export const AuthContext = createContext(null);
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuthContext = () => {
-	return useContext(AuthContext);
+  return useContext(AuthContext);
+};
+
+const getStoredUser = () => {
+  try {
+    const user = localStorage.getItem("chat-user");
+
+    if (!user || user === "undefined") return null;
+
+    return JSON.parse(user);
+  } catch (error) {
+    console.error("Invalid chat-user in localStorage", error);
+    localStorage.removeItem("chat-user");
+    return null;
+  }
 };
 
 export const AuthContextProvider = ({ children }) => {
-	const [authUser, setAuthUser] = useState(JSON.parse(localStorage.getItem("chat-user")) || null);
+  const [authUser, setAuthUser] = useState(getStoredUser());
 
-	return <AuthContext.Provider value={{ authUser, setAuthUser }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ authUser, setAuthUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
