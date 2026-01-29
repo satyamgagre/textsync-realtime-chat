@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLogin from "../../hooks/useLogin";
+import logo from "../../assets/logooo.png";  // Add this line
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -16,15 +17,13 @@ const Login = () => {
     <div className="flex flex-col items-center justify-center min-h-screen w-full px-4 sm:px-6 py-8">
       <div className="w-full max-w-md p-6 sm:p-8 md:p-10 rounded-xl sm:rounded-2xl 
       backdrop-blur-xl bg-gray-900/40 border border-gray-700/50 shadow-2xl">
-        
-        {/* Header */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-100 
-        mb-2 sm:mb-3">
-          Login to{' '}
-          <span className="text-blue-500 bg-gradient-to-r from-blue-500 to-cyan-500 
-          bg-clip-text text-transparent">
-            ChatSync
-          </span>
+                
+        <h1 className="flex flex-col items-center gap-2 mb-2 sm:mb-3">
+          <img 
+            src={logo}
+            alt="ChatSync" 
+            className="h-10 sm:h-12 md:h-14"
+          />
         </h1>
         
         <p className="text-center text-gray-400 text-sm sm:text-base mb-6 sm:mb-8">

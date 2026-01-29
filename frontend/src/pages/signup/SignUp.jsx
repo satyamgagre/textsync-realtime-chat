@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import GenderCheckBox from "./GenderCheckBox";
 import useSignup from "../../hooks/useSignup.js";
+import logo from "../../assets/logooo.png";  
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -36,15 +37,13 @@ const SignUp = () => {
       max-h-[calc(100vh-2rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 
       scrollbar-track-transparent">
         
-        {/* Header */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-100 
-        mb-2 sm:mb-3">
-          Sign Up on{' '}
-          <span className="text-blue-500 bg-gradient-to-r from-blue-500 to-cyan-500 
-          bg-clip-text text-transparent">
-            ChatSync
-          </span>
-        </h1>
+       <h1 className="flex flex-col items-center gap-2 mb-2 sm:mb-3">
+         <img 
+           src={logo}
+           alt="ChatSync" 
+           className="h-10 sm:h-12 md:h-14"
+         />
+       </h1>
         
         <p className="text-center text-gray-400 text-sm sm:text-base mb-5 sm:mb-6">
           Create your account to get started
