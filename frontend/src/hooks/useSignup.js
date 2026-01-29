@@ -29,6 +29,7 @@ const useSignup = () => {
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify({
           fullName,
           username,
@@ -43,6 +44,8 @@ const useSignup = () => {
       if (!res.ok) {
         throw new Error(data.error || "Signup failed");
       }
+
+      localStorage.setItem("chat-user", JSON.stringify(data.user));
 
       console.log(data);
       toast.success("Account created successfully!");
