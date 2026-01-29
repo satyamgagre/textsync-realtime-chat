@@ -1,31 +1,43 @@
 const GenderCheckBox = ({ onCheckBoxChange, selectedGender }) => {
   return (
-    <div className="flex gap-6">
-      {/* Male */}
-      <div className="form-control">
-        <label className={`cursor-pointer label gap-2 ${selectedGender == "Male" ? "selected" : ""}`}>
-          <span className="label-text text-gray-300">Male</span>
+    <div className="space-y-2">
+      <label className="label p-2">
+        <span className="label-text text-sm sm:text-base text-gray-300 font-medium">
+          Gender
+        </span>
+      </label>
+      
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+        {/* Male Option */}
+        <label className="flex items-center gap-2 cursor-pointer group">
           <input
-            type="radio"
-            name="gender"
-            className="radio radio-primary"
-            checked = {selectedGender == "Male"}
-            onChange= {() => onCheckBoxChange("Male")}
+            type="checkbox"
+            className="checkbox checkbox-sm sm:checkbox-md border-gray-600/50 
+            checked:border-blue-500 [--chkbg:theme(colors.blue.600)] 
+            [--chkfg:white] transition-all duration-200"
+            checked={selectedGender === "male"}
+            onChange={() => onCheckBoxChange("male")}
           />
+          <span className="text-sm sm:text-base text-gray-300 group-hover:text-white 
+          transition-colors duration-200">
+            Male
+          </span>
         </label>
-      </div>
 
-      {/* Female */}
-      <div className="form-control">
-        <label className={`cursor-pointer label gap-2 ${selectedGender == "Female" ? "selected" : ""}`}>
-          <span className="label-text text-gray-300">Female</span>
+        {/* Female Option */}
+        <label className="flex items-center gap-2 cursor-pointer group">
           <input
-            type="radio"
-            name="gender"
-            className="radio radio-primary"
-            checked = {selectedGender == "Female"}
-            onChange= {() => onCheckBoxChange("Female")}
+            type="checkbox"
+            className="checkbox checkbox-sm sm:checkbox-md border-gray-600/50 
+            checked:border-blue-500 [--chkbg:theme(colors.blue.600)] 
+            [--chkfg:white] transition-all duration-200"
+            checked={selectedGender === "female"}
+            onChange={() => onCheckBoxChange("female")}
           />
+          <span className="text-sm sm:text-base text-gray-300 group-hover:text-white 
+          transition-colors duration-200">
+            Female
+          </span>
         </label>
       </div>
     </div>
