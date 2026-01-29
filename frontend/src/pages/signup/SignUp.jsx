@@ -146,7 +146,7 @@ const SignUp = () => {
             text-white font-semibold border-none transition duration-200
             disabled:opacity-50"
           >
-            {loading ? "Signing up..." : "Sign Up"}
+            {loading ? <span className="loading loading-spinner"></span> : "Sign Up"}
           </button>
         </form>
       </div>
