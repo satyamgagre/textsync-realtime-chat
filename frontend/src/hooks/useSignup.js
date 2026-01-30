@@ -40,14 +40,14 @@ const useSignup = () => {
           gender,
         }),
       });
-
+      
       const data = await res.json();
 
       if (!res.ok) {
         throw new Error(data.error || "Signup failed");
       }
 
-      localStorage.setItem("chat-user", JSON.stringify(data.user));
+      localStorage.setItem("chat-user", JSON.stringify(data));
       setAuthUser(data);
 
       console.log(data);

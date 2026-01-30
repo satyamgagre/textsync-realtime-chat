@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      lowercase: true,
+      trim: true,
     },
     password: {
       type: String,
@@ -19,17 +21,15 @@ const userSchema = new mongoose.Schema(
     gender: {
       type: String,
       required: true,
-      enum: ["Male", "Female", "Other"],
+      enum: ["male", "female", "other"],
     },
     profilePic: {
       type: String,
       default: "",
     },
   },
-  // createAt and updateAt fields
   { timestamps: true }
 );
 
 const User = mongoose.model("User", userSchema);
-
 export default User;

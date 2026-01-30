@@ -16,7 +16,7 @@ export const signup = async (req, res) => {
       return res.status(400).json({ error: "Passwords do not match" });
     }
 
-    if (!["Male", "Female"].includes(gender)) {
+    if (!["male", "female"].includes(gender)) {
       return res.status(400).json({ error: "Invalid gender value" });
     }
 
@@ -33,7 +33,7 @@ export const signup = async (req, res) => {
 
     // Avatar logic
     const profilePic =
-      gender === "Male"
+      gender === "male"
         ? `https://api.dicebear.com/7.x/avataaars/svg?seed=${normalizedUsername}`
         : `https://api.dicebear.com/7.x/personas/svg?seed=${normalizedUsername}`;
 
