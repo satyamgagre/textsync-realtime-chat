@@ -11,8 +11,8 @@ const MessageInput = () => {
 
 		if (!message.trim()) return;
 
-		await sendMessage(message.trim()); // ✅ send once
-		setMessage("");                    // ✅ clear input
+		await sendMessage(message.trim()); 
+		setMessage("");                    
 	};
 
 	return (

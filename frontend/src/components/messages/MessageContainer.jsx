@@ -2,22 +2,31 @@ import Messages from "./Messages.jsx";
 import MessageInput from "./MessageInput.jsx";
 import { TiMessages } from "react-icons/ti";
 import useConversation from "../../zustand/useConversation.js";
+import { useAuthContext } from "../../context/AuthContext";
+
 
 const NoChatSelected = () => {
+	const { authUser } = useAuthContext();
+
 	return (
-		<div className="flex items-center justify-center w-full h-full">
-			<div className="px-4 text-center sm:text-lg md:text-xl text-slate-300 font-semibold flex flex-col items-center gap-4">
-				<div className="backdrop-blur-xl bg-white/5 border border-slate-700/50 rounded-2xl p-8">
-					<TiMessages className="text-6xl md:text-8xl text-slate-400 mb-4 mx-auto" />
-					<p className="text-white mb-2">Welcome John Doe</p>
-					<p className="text-slate-400 text-base font-normal">
-						Select a chat to start messaging
-					</p>
-				</div>
+		<div className="relative flex items-center justify-center w-full h-full overflow-hidden">
+			{/* Glass Card */}
+			<div className="relative z-10 rounded-3xl px-10 py-12 max-w-sm w-full mx-4 flex flex-col items-center gap-3 text-center backdrop-blur-xl bg-white/10 border border-slate-700/50">
+				<span className="text-slate-400 text-sm">Welcome back</span>
+
+				<p className="text-white text-xl font-medium">
+					{authUser?.fullName}
+				</p>
+
+				<p className="text-slate-400 text-sm">
+					Select a conversation to start chatting
+				</p>
 			</div>
 		</div>
 	);
 };
+
+
 
 const MessageContainer = () => {
 	const { selectedConversation } = useConversation();
