@@ -1,17 +1,36 @@
-const Message = () => {
-    return (
-        <div className="chat chat-end">
-            <div className="chat-image avatar">
-                <div className="w-10 rounded-full ring-2 ring-slate-700/30">
-                    <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" alt="User Avatar" />
-                </div>
-            </div>
-            <div>
-                <div className={`chat-bubble backdrop-blur-xl bg-white/20 text-white border border-slate-700/50`}>Hello! How are you today?</div>
-                <div className="text-xs text-slate-400 mt-1">10:30 AM</div>
-            </div>
-        </div>
-    );
+import { useAuthContext } from "../../context/AuthContext";
+import { extractTime } from "../../utils/extractTime";
+import useConversation from "../../zustand/useConversation";
+
+const Message = ({ message }) => {
+	const { authUser } = useAuthContext();
+	const { selectedConversation } = useConversation();
+
+	const fromMe = message?.senderId === authUser?._id;
+    const formattedTime = extractTime(message.createdAt);
+	const chatClassName = fromMe ? "chat-end" : "chat-start";
+	const profilePic = fromMe
+		? authUser?.profilePic
+		: selectedConversation?.profilePic;
+
+	const bubbleBgColour = fromMe ? "bg-white/20" : "";
+
+	return (
+		<div className={`chat ${chatClassName}`}>
+			<div className="chat-image avatar">
+				<div className="w-10 rounded-full ring-2 ring-slate-700/30">
+					<img src={profilePic} alt="User Avatar" />
+				</div>
+			</div>
+
+			<div>
+				<div
+					className={`chat-bubble backdrop-blur-xl text-white border border-slate-700/50 ${bubbleBgColour}`}
+				>{message.message}</div>
+                <div className="chat-footer opacity-50 text-xs flex gap-1 items-center" >{formattedTime}</div>
+			</div>
+		</div>
+	);
 };
 
 export default Message;

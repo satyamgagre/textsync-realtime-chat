@@ -1,4 +1,3 @@
-import {useEffect} from "react";
 import Messages from "./Messages.jsx";
 import MessageInput from "./MessageInput.jsx";
 import { TiMessages } from "react-icons/ti";
@@ -11,7 +10,9 @@ const NoChatSelected = () => {
 				<div className="backdrop-blur-xl bg-white/5 border border-slate-700/50 rounded-2xl p-8">
 					<TiMessages className="text-6xl md:text-8xl text-slate-400 mb-4 mx-auto" />
 					<p className="text-white mb-2">Welcome John Doe</p>
-					<p className="text-slate-400 text-base font-normal">Select a chat to start messaging</p>
+					<p className="text-slate-400 text-base font-normal">
+						Select a chat to start messaging
+					</p>
 				</div>
 			</div>
 		</div>
@@ -19,33 +20,28 @@ const NoChatSelected = () => {
 };
 
 const MessageContainer = () => {
-    const { selectedConversation, setSelectedConversation } = useConversation();
+	const { selectedConversation } = useConversation();
 
-    useEffect(() => {
-        // cleanup on unmount
-        return () => setSelectedConversation(null);
-    }, [setSelectedConversation]);
+	return (
+		<div className="md:min-w-[450px] flex flex-col">
+			{!selectedConversation ? (
+				<NoChatSelected />
+			) : (
+				<>
+					{/* Header */}
+					<div className="backdrop-blur-xl bg-white/10 border-b border-slate-700/50 px-4 py-3 mb-2">
+						<span className="label-text text-slate-400">To:</span>{" "}
+						<span className="text-white font-medium">
+							{selectedConversation?.fullName}
+						</span>
+					</div>
 
-
-    const NoChatSelectedFlag = false; 
-    return (
-        <div className="md:min-w-[450px] flex flex-col">
-            {!selectedConversation ? (
-                <NoChatSelected />
-            ) : (
-                <>
-                    {/* Header */}
-                    <div className="backdrop-blur-xl bg-white/10 border-b border-slate-700/50 px-4 py-3 mb-2">
-                        <span className="label-text text-slate-400">To:</span>{" "}
-                        <span className="text-white font-medium">{selectedConversation.fullName}</span>
-                    </div>
-
-                    <Messages/>
-                    <MessageInput/>
-                </>
-            )}
-        </div>
-    );
+					<Messages />
+					<MessageInput />
+				</>
+			)}
+		</div>
+	);
 };
 
 export default MessageContainer;
