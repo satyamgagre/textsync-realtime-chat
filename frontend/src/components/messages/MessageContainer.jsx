@@ -10,7 +10,6 @@ const NoChatSelected = () => {
 
 	return (
 		<div className="relative flex items-center justify-center w-full h-full overflow-hidden">
-			{/* Glass Card */}
 			<div className="relative z-10 rounded-3xl px-10 py-12 max-w-sm w-full mx-4 flex flex-col items-center gap-3 text-center backdrop-blur-xl bg-white/10 border border-slate-700/50">
 				<span className="text-slate-400 text-sm">Welcome back</span>
 
