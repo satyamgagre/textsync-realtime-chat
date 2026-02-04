@@ -20,8 +20,12 @@ io.on('connection',(socket) => {
     const userId = socket.handshake.query.userId;
     if(userId != "undefined") useSocketMap[userId] = socket.id;
 
+    io.emit("getOnlineUsers", Object.keys(useSocketMap));
+
     socket.on("disconnect",() =>{
         console.log("A user Disconnected", socket.id)
+        delete useSocketMap[userId];
+        io.emit("getOnlineUsers", Object.keys(useSocketMap));
     })
 })
 
